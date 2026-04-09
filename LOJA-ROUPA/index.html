@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Loja de Roupas: Galeria com Modal</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .resultado { margin: 10px 0; padding: 10px;
+            background: #f0f0f0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Loja de Roupas: Galeria com Modal</h2>
+    <button onclick="mostrarDetalhes('Camiseta', 'R$ 49,90')">Camiseta</button>
+    <button onclick="mostrarDetalhes('Calca', 'R$ 89,90')">Calca</button>
+    <div id="modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);padding:50px">
+    <div style="background:white;padding:30px;max-width:400px;margin:auto;border-radius:10px">
+    <h3 id="modal-titulo"></h3>
+    <p id="modal-preco"></p>
+    <button onclick="fecharModal()">Fechar</button>
+    </div>
+    </div>
+    <div id="resultado" class="resultado"></div>
+    <script>
+    function mostrarDetalhes(titulo, preco) {
+      document.getElementById("modal-titulo").innerText = titulo;
+      document.getElementById("modal-preco").innerText = preco;
+      document.getElementById("modal").style.display = "block";
+    }
+    function fecharModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+    </script>
+</body>
+</html>
