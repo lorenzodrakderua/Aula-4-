@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Hamburgueria : Carrinho de Compras</title>
+    <style>
+    </style>
+</head>
+<body>
+    <h2>Hamburgueria do Alemao: Carrinho de Compras🍔</h2>
+    <button onclick="adicionarItem('X-Burguer', 18)">X-Burguer R$18</button>
+    <button onclick="adicionarItem('X-bacon', 25)">X-Bacon R$25</button>
+    <button onclick="adicionarItem('x- salada', 15)">x -Salada R$15</button>
+    <pre id="lista-carrinho"></pre>
+    <b id="total">Total: R$ 0,00</b>
+    <div id="resultado" class="resultado"></div>
+    <script>
+    var carrinho = [];
+    function adicionarItem(nome, preco) {
+      carrinho.push({ nome: nome, preco: preco });
+      atualizarCarrinho();
+    }
+    function atualizarCarrinho() {
+      var total = 0;
+      var lista = "";
+      for (var i = 0; i < carrinho.length; i++) {
+        total += carrinho[i].preco;
+        lista += carrinho[i].nome + " - R$ " +
+          carrinho[i].preco.toFixed(2) + "\n";
+      }
+      document.getElementById("lista-carrinho").innerText = lista;
+      document.getElementById("total").innerText =
+        "Total: R$ " + total.toFixed(2);
+    }
+    </script>
+</body>
+</html>
