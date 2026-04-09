@@ -1,37 +1,170 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Hamburgueria : Carrinho de Compras</title>
-    <style>
-    </style>
+<meta charset="UTF-8">
+<title>Hamburgueria do Alemão</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #0f0f0f;
+  color: #fff;
+  text-align: center;
+}
+
+/* Header */
+header {
+  background: #1c1c1c;
+  padding: 20px;
+  font-size: 26px;
+  color: #ff6b2c;
+  font-weight: bold;
+  border-bottom: 2px solid #2a2a2a;
+}
+
+/* Container */
+.container {
+  padding: 20px;
+}
+
+/* Botões */
+.card {
+  background: #1a1a1a;
+  margin: 15px auto;
+  padding: 15px;
+  width: 280px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.card h3 {
+  margin: 0;
+}
+
+.card button {
+  margin-top: 10px;
+  background: linear-gradient(135deg, #ff6b2c, #ff3c00);
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card button:hover {
+  transform: translateY(-2px);
+}
+
+/* Carrinho */
+#carrinho-box {
+  background: #1a1a1a;
+  margin: 30px auto;
+  padding: 20px;
+  width: 320px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+/* Botão remover */
+.remover {
+  background: red;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 3px 8px;
+}
+
+/* Total */
+#total {
+  margin-top: 15px;
+  font-size: 20px;
+  color: #00ff88;
+  font-weight: bold;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .card, #carrinho-box {
+    width: 90%;
+  }
+}
+</style>
+
 </head>
 <body>
-    <h2>Hamburgueria do Alemao: Carrinho de Compras🍔</h2>
-    <button onclick="adicionarItem('X-Burguer', 18)">X-Burguer R$18</button>
-    <button onclick="adicionarItem('X-bacon', 25)">X-Bacon R$25</button>
-    <button onclick="adicionarItem('x- salada', 15)">x -Salada R$15</button>
-    <pre id="lista-carrinho"></pre>
-    <b id="total">Total: R$ 0,00</b>
-    <div id="resultado" class="resultado"></div>
-    <script>
-    var carrinho = [];
-    function adicionarItem(nome, preco) {
-      carrinho.push({ nome: nome, preco: preco });
-      atualizarCarrinho();
-    }
-    function atualizarCarrinho() {
-      var total = 0;
-      var lista = "";
-      for (var i = 0; i < carrinho.length; i++) {
-        total += carrinho[i].preco;
-        lista += carrinho[i].nome + " - R$ " +
-          carrinho[i].preco.toFixed(2) + "\n";
-      }
-      document.getElementById("lista-carrinho").innerText = lista;
-      document.getElementById("total").innerText =
-        "Total: R$ " + total.toFixed(2);
-    }
-    </script>
+
+<header>🍔 Hamburgueria do Alemão</header>
+
+<div class="container">
+
+  <div class="card">
+    <h3>X-Burguer</h3>
+    <p>R$ 18,00</p>
+    <button onclick="adicionarItem('X-Burguer', 18)">Adicionar</button>
+  </div>
+
+  <div class="card">
+    <h3>X-Bacon</h3>
+    <p>R$ 25,00</p>
+    <button onclick="adicionarItem('X-Bacon', 25)">Adicionar</button>
+  </div>
+
+  <div class="card">
+    <h3>X-Salada</h3>
+    <p>R$ 15,00</p>
+    <button onclick="adicionarItem('X-Salada', 15)">Adicionar</button>
+  </div>
+
+</div>
+
+<div id="carrinho-box">
+  <h3>🛒 Carrinho</h3>
+  <div id="lista-carrinho"></div>
+  <div id="total">Total: R$ 0,00</div>
+</div>
+
+<script>
+var carrinho = [];
+
+function adicionarItem(nome, preco) {
+  carrinho.push({ nome, preco });
+  atualizarCarrinho();
+}
+
+function removerItem(index) {
+  carrinho.splice(index, 1);
+  atualizarCarrinho();
+}
+
+function atualizarCarrinho() {
+  var total = 0;
+  var lista = "";
+
+  for (var i = 0; i < carrinho.length; i++) {
+    total += carrinho[i].preco;
+
+    lista += `
+      <div class="item">
+        ${carrinho[i].nome} - R$ ${carrinho[i].preco.toFixed(2)}
+        <button class="remover" onclick="removerItem(${i})">X</button>
+      </div>
+    `;
+  }
+
+  document.getElementById("lista-carrinho").innerHTML = lista;
+  document.getElementById("total").innerText =
+    "Total: R$ " + total.toFixed(2);
+}
+</script>
+
 </body>
 </html>
